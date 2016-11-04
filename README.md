@@ -1,4 +1,4 @@
-# Web Crawler from Scratch using Python
+# A Web Crawler from Scratch using Python
 
 This repo implements a Python version of web crawler from scratch, i.e. without using any libraries for the purpose of web crawling.
 
