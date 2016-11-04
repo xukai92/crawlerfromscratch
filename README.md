@@ -21,7 +21,3 @@ This repo implements a Python version of web crawler from scratch, i.e. without 
 ### Testing
 
 ## Reference
-
-// ## About author
-
-// [Kai](xukai92.github.io) is a machine learning engineer and software engineer, currently working in the Cambridge Machine Learning Group as a research assistant for the [Turing](https://github.com/yebai/Turing.jl} project. 
