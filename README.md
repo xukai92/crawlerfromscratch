@@ -16,7 +16,7 @@ This repo implements a Python version of web crawler from scratch, i.e. without 
 
 ### Design pattern
 
-### Components and API
+### APIs
 
 ### Testing
 
