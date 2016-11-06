@@ -1,4 +1,10 @@
+# This is the test file for this web crawler.
+# Author: Kai Xu
+# Date: 05/11/2016
+
+
 from spider import clean, valid
+
 
 class Test(object):
     def __init__(self):
@@ -21,6 +27,8 @@ class Test(object):
         self.test_valid()
         print "[Test] all tests pass"
         print "[Test] finish testing"
+
+    # TODO: add test cases for Spider
 
 
 if __name__ == "__main__":

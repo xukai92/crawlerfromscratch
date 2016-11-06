@@ -20,4 +20,3 @@ This repo implements a Python version of web crawler from scratch, i.e. without 
 
 ### Testing
 
-## Reference

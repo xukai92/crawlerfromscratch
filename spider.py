@@ -1,3 +1,8 @@
+# This file contains core functions and classes for the web crawler.
+# Author: Kai Xu
+# Date: 05/11/2016
+
+
 from urllib2 import urlopen
 from HTMLParser import HTMLParser
 from urlparse import urljoin
