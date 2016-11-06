@@ -15,26 +15,32 @@ def clean(url):
     @output:
         url     :   the clean url
     '''
+    # Deal with "http(s)://"
     if url[0:4] != "http":
         url = "http://" + url
+
+    # Deal with "#"
     idx = url.find('#')
     if idx != -1:
         url = url[:idx]
+    
+    # Deal with last "/"
     l = len(url)
     if url[l - 1] == '/':
         url = url[:l - 1]
+    
     return url
 
 
 def valid(url):
     '''
-    Check if the given url is valid
+    Check if the given url is valid (within in "gocardless.com" domain)
     @input:
         url     :   the url to be checked
     @output:
         ???     :   if the url is valid
     '''
-    if re.match( r'^https?://([\w-]*\.)?gocardless.com.*$', url, re.M|re.I ):
+    if re.match(r'^https?://([\w-]*\.)?gocardless.com.*$', url, re.M|re.I):
         return True
     else:
         return False
@@ -67,14 +73,14 @@ class HTMLParser(HTMLParser):
         self.urls = []  # init return list
 
         # Open the url and parse it
-        # FIXME: 
+        # FIXME:
         # There will be potential error when some website handshake is unsuccessful due to the SSL.
         # This is temporarly fixed by ignoring such failure but it should be further investiagted.
         try:
-            response = urlopen(url)
-            html = response.read().decode("utf-8")
-            self.feed(html)
-        except KeyboardInterrupt:
+            response = urlopen(url)                 # request and get response
+            html = response.read().decode("utf-8")  # read and encode response; NOTE: decode is necessary for unicode
+            self.feed(html)                         # parse the html file in string format
+        except KeyboardInterrupt:                   # deal with Ctrl-C
             exit()
         except:
             pass
@@ -89,14 +95,17 @@ class Spider(object):
         self.parser = HTMLParser()
 
     def crawl(self, target_url):
-        target_url = clean(target_url)
-        self.to_visit.append(target_url)
+        target_url = clean(target_url)      # clean target_url
+        self.to_visit.append(target_url)    # put target_url to to_visit list
 
         while len(self.to_visit) > 0:
-            url = self.to_visit.pop(0)
-            self.visted.add(url)
+            url = self.to_visit.pop(0)      # get next url
             print "The spider is visiting:", url
-            urls = self.parser.run(url)
+            urls = self.parser.run(url)     # parse the url
+            self.visted.add(url)            # add this visted url to visted list
+
+            # Add urls from the praser to to_visit lits
+            # When they are not visited or already in the to_vist list
             for url in urls:
                 if url not in self.visted and url not in self.to_visit:
                     self.to_visit.append(url)
