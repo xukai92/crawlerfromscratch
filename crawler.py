@@ -11,7 +11,7 @@ from test import Test
 
 HELPMSG = ("------------------Usage-----------------"
            "1. Crawl a website:"
-           "    python crawler.py -s [target_website]"
+           "    python crawler.py -c [target_website]"
            "2. Run tests:"
            "    python crawler.py -test"
            "3. Help:"
@@ -34,15 +34,15 @@ def main():
 
     # Execute function depending on arguments
     if len(args) == 1:
-        if args[0] == "-test":
+        if args[0] == "-test":      # test
             test = Test()
             test.test_all()
-        elif args[0] == "-help":
+        elif args[0] == "-help":    # help
             print_help()
         else:
             print_help(True)
     elif len(args) == 2:
-        if args[0] == "-s":
+        if args[0] == "-c":         # crawl
             url = args[1]
             print "[crawler.py] start crawling"
             spider = Spider()
