@@ -6,11 +6,12 @@
 
 import sys  # for handling arguments
 from spider import Spider
+from test import Test
 
 
 HELPMSG = ("------------------Usage-----------------"
            "1. Crawl a website:"
-           "    python crawler.py -t [target_website]"
+           "    python crawler.py -s [target_website]"
            "2. Run tests:"
            "    python crawler.py -test"
            "3. Help:"
@@ -31,21 +32,21 @@ def main():
     # Fetch the arguments; the first elements in sys.argv is this python file itself - so ignore
     args = sys.argv[1:]
 
+    # Execute function depending on arguments
     if len(args) == 1:
         if args[0] == "-test":
-            print "[crawler.py] start testing"
-            # call runtest.py
-            print "[crawler.py] all tests pass"
+            test = Test()
+            test.test_all()
         elif args[0] == "-help":
             print_help()
         else:
             print_help(True)
     elif len(args) == 2:
-        if args[0] == "-t":
+        if args[0] == "-s":
             url = args[1]
             print "[crawler.py] start crawling"
             spider = Spider()
-            spider.walk(url)
+            spider.crawl(url)
             print "[crawler.py] crawling done"
         else:
             print_help(True)
