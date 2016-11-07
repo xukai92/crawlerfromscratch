@@ -51,6 +51,13 @@ def valid(url):
         return False
 
 
+def contain_static(val):
+    if re.match(r'^.*\.(jpg|jpeg|gif|png|css|js|ico|xml|rss|txt).*$', val, re.M|re.I):
+        return True
+    else:
+        return False
+
+
 class HTMLParser(HTMLParser):
     '''
     HTML parser to fetch urls and show assests
@@ -61,14 +68,19 @@ class HTMLParser(HTMLParser):
         Overrid of the default function to handle <a> and ??? tags
         TODO: update this comments when assest handle is done
         '''
-        if tag == "a":
-            for key, val in attrs:
-                if key == "href":
+        for key, val in attrs:
+            if key == "href":
+                # Handle links
+                if tag == "a":
                     url = urljoin(self.url, val)    # append relative path to the root path
                     url = clean(url)                # clean up url
                     if valid(url):
                         self.urls.append(url)       # append url to the return list
-        # TODO: handle assesst
+
+                # Handle static files
+                if contain_static(val):
+                    print val
+
 
     def run(self, url):
         '''

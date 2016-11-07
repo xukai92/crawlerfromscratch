@@ -3,7 +3,7 @@
 # Date: 05/11/2016
 
 
-from spider import clean, valid
+from spider import clean, valid, HTMLParser
 
 
 class Test(object):
@@ -22,9 +22,19 @@ class Test(object):
         assert valid("http://abc-ef.gocardless.com") is True
         print "[Test] test_valid() pass"
 
+    def test_HTMLParser_handle_starttag(self):
+        parser = HTMLParser()
+        parser.url = ""     # save root path
+        parser.urls = []    # init return list
+        f = open("view-source_https___gocardless.com.html", "r")
+        parser.feed(f.read())
+        f.close()
+        print "[Test] HTMLParser.handle_starttag() pass"
+
     def test_all(self):
         self.test_clean()
         self.test_valid()
+        self.test_HTMLParser_handle_starttag()
         print "[Test] all tests pass"
         print "[Test] finish testing"
 
