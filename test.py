@@ -3,7 +3,8 @@
 # Date: 05/11/2016
 
 
-from spider import clean, get_domain, valid, contain_static, HTMLParser
+from helper import clean, get_domain, valid, contain_static
+from spider import HTMLParser
 
 
 class Test(object):
