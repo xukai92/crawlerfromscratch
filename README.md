@@ -6,8 +6,9 @@ This repo implements a Python version of web crawler from scratch, i.e. without 
 
 1. Clone this repo
 2. Run the crawler by `python crawler.py -c [target_website]`
+3. Wait it crawls the whole webiste or exit using `^C-C`
 
-Note: this web crawler is developed and only tested in Python 2.7.10.
+**Note**: this web crawler is developed and only tested in Python 2.7.10.
 
 ### Other usage
 
