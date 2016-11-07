@@ -9,19 +9,20 @@ from spider import Spider
 from test import Test
 
 
-HELPMSG = ("------------------Usage-----------------"
-           "1. Crawl a website:"
-           "    python crawler.py -c [target_website]"
-           "2. Run tests:"
-           "    python crawler.py -test"
-           "3. Help:"
-           "    python crawler.py -help")
+HELPMSG = ("----------------- Usage ----------------\n"
+           "1. Crawl a website:\n"
+           "    python crawler.py -c [target_website]\n"
+           "2. Run tests:\n"
+           "    python crawler.py -test\n"
+           "3. Help:\n"
+           "    python crawler.py -help\n"
+           "----------------------------------------\n")
 
 
 def print_help(warning=False):
     if warning:
-        print "-----------------Warning----------------"
-        print "Arguments unrecoginized - please check the usage below"
+        print "---------------- Warning ---------------"
+        print "Arguments unrecoginized, plz check usage"
     else:
         print "----------------------------------------"
         print "Welcome to this web crawler coded by Kai"
