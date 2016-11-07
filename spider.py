@@ -21,16 +21,15 @@ class HTMLParser(HTMLParser):
         '''
         for key, val in attrs:
             if key == "href":
-                # Handle links
-                if tag == "a":
+                if contain_static(val):             # handle static files
+                    print "-", val                  # show the static file
+                elif tag == "a":                    # handle links
                     url = urljoin(self.url, val)    # append relative path to the root path
                     url = clean(url)                # clean up url
                     if valid(url, self.domain):
                         self.urls.append(url)       # append url to the return list
-
-                # Handle static files
-                if contain_static(val):
-                    print "-", val                  # show the static file
+                else:
+                    pass
 
 
     def run(self, url):
