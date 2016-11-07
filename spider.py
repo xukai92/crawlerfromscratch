@@ -52,7 +52,7 @@ class HTMLParser(HTMLParser):
         except KeyboardInterrupt:                   # deal with Ctrl-C
             exit()
         except:
-            pass
+            print "Unexpected failure happens and the spider escapes."
 
         return self.urls
 
