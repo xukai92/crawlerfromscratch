@@ -5,7 +5,7 @@
 
 from urllib2 import urlopen
 from HTMLParser import HTMLParser
-from urlparse import urljoin
+from urlparse import urljoin, urlparse
 import re
 
 
@@ -28,30 +28,49 @@ def clean(url):
     idx = url.find('#')
     if idx != -1:
         url = url[:idx]
-    
+
     # Deal with last "/"
     l = len(url)
     if url[l - 1] == '/':
         url = url[:l - 1]
-    
+
     return url
 
 
-def valid(url):
+def get_domain(url):
     '''
-    Check if the given url is valid (within in "gocardless.com" domain)
+    Get the domain of a given url
+    @input:
+        url     :   the url to be processed
+    @output:
+        domain  :   the domain of the url
+    '''
+    parsed_url = urlparse(url)
+    return "{url.netloc}".format(url=parsed_url)
+
+
+def valid(url, domain):
+    '''
+    Check if the given url is valid (e.g. within in "gocardless.com" domain)
     @input:
         url     :   the url to be checked
     @output:
-        ???     :   if the url is valid
+        valid?  :   if the url is valid
     '''
-    if re.match(r'^https?://([\w-]*\.)?gocardless.com.*$', url, re.M|re.I):
+    if re.match(r'^https?://([\w-]*\.)?' + domain + r'.*$', url, re.M|re.I):
         return True
     else:
         return False
 
 
 def contain_static(val):
+    '''
+    Check if a given val (relative path or url) contains static files
+    @input:
+        val         :   relative path or url
+    @output:
+        contain?    :   if the val contains a static file
+    '''
     if re.match(r'^.*\.(jpg|jpeg|gif|png|css|js|ico|xml|rss|txt).*$', val, re.M|re.I):
         return True
     else:
@@ -74,20 +93,21 @@ class HTMLParser(HTMLParser):
                 if tag == "a":
                     url = urljoin(self.url, val)    # append relative path to the root path
                     url = clean(url)                # clean up url
-                    if valid(url):
+                    if valid(url, self.domain):
                         self.urls.append(url)       # append url to the return list
 
                 # Handle static files
                 if contain_static(val):
-                    print val
+                    print "-", val                  # show the static file
 
 
     def run(self, url):
         '''
         Run the parser and return links in this page
         '''
-        self.url = url  # save root path
-        self.urls = []  # init return list
+        self.url = url                  # save root path
+        self.domain = get_domain(url)   # get and save domain
+        self.urls = []                  # init return list
 
         # Open the url and parse it
         # FIXME:
