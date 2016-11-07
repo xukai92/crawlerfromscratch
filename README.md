@@ -20,9 +20,9 @@ The final product is designed to be a command line tool which can be used as abo
 
 ### How to crawl
 
-In order to crawl, you firstly need to bend your knee ... wait, it's how to *crawl a web*.
+In order to crawl, you firstly need to bend your knee ... wait, it's how to **crawl a web**.
 
-OK, let's try again. In order to crawl a web, you need a *spider* - I'm not kidding this time. All you need to do is guide a spider to walk around the web.
+OK, let's try again. In order to crawl a web, you need a **spider** - I'm not kidding this time. All you need to do is guide a spider to walk around the web.
 
 The basic guide of web crawl for the spider is (BTW I promise I will not make any joke in the reamining contents)
 
@@ -30,7 +30,7 @@ The basic guide of web crawl for the spider is (BTW I promise I will not make an
 2. Fetch all links from the website
 3. Visit these links
 
-But wait, if there is a *cycle*, i.e. website A contains a link to B and B contains a link to A as well, the crawl will never terminate (and our spider will die). So we also need to remember which websites we have already visited and avoid visiting them again - easy, just cache it somehow. So the complete flow would be
+But wait, if there is a **cycle**, i.e. website A contains a link to B and B contains a link to A as well, the crawl will never terminate (and our spider will die). So we also need to remember which websites we have already visited and avoid visiting them again - easy, just cache them somehow. So the complete flow would be
 
 0. Put the first url to `to_vist`
 1. Get one url from `to_visit` and add it to `visted`
@@ -55,7 +55,7 @@ As we cache URLs using their string representation, we need make sure no stupid 
 
 Always, element jumpying with `#` doesn't change the content of the website - so removing them as well.
 
-Note: parameter passing using `?` may change the content of website so they cannot be removed.
+**Note**: parameter passing using `?` may change the content of website so they cannot be removed.
 
 #### Within domain?
 
