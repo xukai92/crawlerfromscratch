@@ -10,7 +10,7 @@ import re                       # for regular expression
 def clean(url):
     '''
     Clean up url by
-        - always start with "http://" or "https://"
+        - remove "http://" or "https://"
         - remove element jumping
         - remove last '/'
     @input:
@@ -19,8 +19,10 @@ def clean(url):
         url     :   the clean url
     '''
     # Deal with "http(s)://"
-    if url[0:4] != "http":
-        url = "http://" + url
+    if url[0:7] == "http://":
+        url = url[7:]
+    if url[0:8] == "hppts://":
+        url = url[8:]
 
     # Deal with "#"
     idx = url.find('#')
